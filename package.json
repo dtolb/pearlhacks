@@ -1,0 +1,32 @@
+{
+  "name": "pearlhacks",
+  "version": "1.0.0",
+  "description": "Just a little demo hacking some pearls",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/dtolb/pearlhacks.git"
+  },
+  "keywords": [
+    "node",
+    "bandwidth",
+    "pearlhacks",
+    "demo",
+    "introduction"
+  ],
+  "author": "Dan Tolbert",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/dtolb/pearlhacks/issues"
+  },
+  "homepage": "https://github.com/dtolb/pearlhacks#readme",
+  "dependencies": {
+    "body-parser": "^1.18.2",
+    "express": "^4.16.2",
+    "node-bandwidth": "^2.6.2"
+  }
+}

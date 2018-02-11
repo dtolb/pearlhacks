@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Bandwidth Messaging Demo</title>
+<link href="https://d3l0ifulerbodr.cloudfront.net/main.css" rel="stylesheet">
+<style>
+    .main-container{
+        width: 60%;
+        max-width: 700px;
+        margin: 0 auto;
+    }
+    .main-container button{
+        float: right;
+    }
+    .table-wrap{
+        margin-top: 5em;
+        clear: both;
+    }
+</style>
+</head>
+<body>
+<div class="main-container">
+    <h1>Bandwidth Messaging Demo</h1>
+    <hr />
+    <br />
+<!-- Start component HTML -->
+    <div class="inline-wrap">
+        <div class="form-input blocks clearfix required">
+            <label for="input-tel">Phone Number:</label>
+            <input type="tel" value="" id="toNumber" />
+            <div class="help">Accepts formats +12223334444</div>
+        </div>
+        <div class="form-input blocks clearfix required">
+            <label for="input-text">Text:</label>
+            <input type="tel" value="" id="text" />
+            <div class="help">Text to send:</div>
+        </div>
+        <div class="form-input blocks clearfix">
+            <label for="input-text">Media:</label>
+            <input type="tel" value="" id="media" />
+            <div class="help">URL of picture to send:</div>
+        </div>
+    </div>
+    <button class="submit button button--hover-go button--right" id="sendMessageButton">Send</button>
+
+<!--     <div class="table-wrap">
+        <table cellpadding="0" cellspacing="0" class="small" id='maskedNumbersTable'>
+            <thead>
+                <tr>
+                    <th>Masked Number</th>
+                    <th>Number one</th>
+                    <th>Number two</th>
+                </tr>
+            </thead>
+            <tbody id='maskedNumbersTableBody'>
+            </tbody>
+        </table>
+    </div>
+ -->
+</div>
+<!-- End component HTML -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
+<!-- <script src="js/base.js"></script>
+<script src="js/index.js"></script>
+<scirpt src="js/tables.js"></scirpt> -->
+<script type="text/javascript">
+    var phoneNumberRegex = /\+1\d{10}/g;
+    var sendMessage = function () {
+        var media = $('#media').val();
+        var to = $('#toNumber').val();
+        var text = $('#text').val();
+        if (to === '' || text === '') {
+            alert('Please enter both a phone number and some text to send');
+            return;
+        }
+        if (phoneNumberRegex.exec(to) === null){
+            alert('Please make sure the phone number is formatted like: +12223334444');
+            return;
+        }
+        else {
+            return submitMessage(to, media, text)
+            .catch(function (error) {
+                alert(error);
+            })
+        }
+    };
+    $('#text').keyup(function (event) {
+        if(event.keyCode == 13){
+            sendMessage();
+        }
+    });
+    $('#media').keyup(function (event) {
+        if(event.keyCode == 13){
+            sendMessage();
+        }
+    });
+    $('#media').keyup(function (event) {
+        if(event.keyCode == 13){
+            sendMessage();
+        }
+    });
+
+    $('#sendMessageButton').click(sendMessage)
+
+    var submitMessage = function (to, media, text) {
+        var messageParams = {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+                to: to,
+                text: text,
+                media: media,
+            })
+        };
+        console.log(messageParams);
+        var createMessageRequest = new Request('/send-message', messageParams);
+        var isOk;
+        return fetch(createMessageRequest)
+        .then(function (response) {
+            isOk = response.ok
+            return response.json();
+        })
+        .then(function (j) {
+            if(isOk) {
+                alert('Sent!')
+                return j;
+            }
+            else {
+                throw new Error(j.error);
+                return;
+            }
+        });
+    }
+
+</script>
+</body>
+</html>
