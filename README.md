@@ -1,10 +1,10 @@
 # pearlhacks
 Peral Hacks Demonstration
 
-<!-- Embed Code -->
-<div class="glitch-embed-wrap" style="height: 420px; width: 100%; border: 1px solid #C3C3C3; border-radius: 5px; box-shadow: 4px 4px #C3C3C3; background-color: white; overflow: hidden;">
-  <iframe src="https://glitch.com/embed/#!/embed/grateful-badger?path=package.json" style="height: 100%; width: 100%; border: 0;" alt="code example in glitch"></iframe>
-</div>
+<!-- Remix Button -->
+<a href="https://glitch.com/edit/#!/remix/grateful-badger">
+  <img src="https://cdn.glitch.com/2bdfb3f8-05ef-4035-a06e-2043962a3a13%2Fremix%402x.png?1513093958726" alt="remix button" aria-label="remix" height="33">
+</a>
 
 ## Pre-reqs
 * [Bandwidth Account](http://app.bandwidth.com)
