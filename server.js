@@ -14,15 +14,39 @@ app.set('port', (process.env.PORT || 3000));
 /* Setup our Bandwidth information */
 const myBWNumber = '+15304470141';
 const myCreds = {
-    userId    : 'u-xl7bbpc5khrk3iotf6nl77q',
-    apiToken  : 't-lggejwm7x2blwuqxvvmwaoq',
-    apiSecret : '5f56b575ib4silvx6utszwzs2d3pfiiamwj6kla'
+    userId    : 'u-',
+    apiToken  : 't-',
+    apiSecret : ''
 };
 const bandwidthAPI = new Bandwidth(myCreds);
 
 /* Serve our lil website */
 app.get("/", function (req, res) {
       res.sendFile(path.join(__dirname + '/index.html'));
+});
+
+app.get("/pearl-hacks", function(req, res) {
+    res.send("Pearl Hacks");
+})
+
+
+app.post("/api/incoming-messages", function (req, res){
+    const messageBody = req.body;
+    console.log(messageBody);
+    res.send(200);
+    const myRequest = req.body.text;
+
+    bandwidthAPI.Message.send({
+        to: req.body.from,
+        from: req.body.to,
+        text: "Thank you for sending a text messages"
+    })
+    .then(function (result){
+        console.log(result);
+    })
+    .catch(function (error){
+        console.log(error);
+    });
 });
 
 /* Answer the request to send the text message */
